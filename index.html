@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>テトリス</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="startScreen" class="modal">
+        <div class="modal-content">
+            <h1>テトリス</h1>
+            <h2>モード選択</h2>
+            <div class="mode-buttons">
+                <button class="mode-btn" data-mode="endless">エンドレス</button>
+                <button class="mode-btn" data-mode="lines40">40列クリア</button>
+                <button class="mode-btn" data-mode="lines20">20列クリア</button>
+                <button class="mode-btn" data-mode="rising">ライジング</button>
+                <button class="mode-btn" data-mode="timeattack">タイムアタック (1分)</button>
+            </div>
+            <button id="settingsBtn" class="settings-btn">キー設定</button>
+        </div>
+    </div>
+
+    <div id="settingsModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>キー設定</h2>
+            <div class="key-settings">
+                <div class="key-setting">
+                    <label>左移動:</label>
+                    <input type="text" id="keyLeft" readonly>
+                    <button class="change-key" data-action="moveLeft">変更</button>
+                </div>
+                <div class="key-setting">
+                    <label>右移動:</label>
+                    <input type="text" id="keyRight" readonly>
+                    <button class="change-key" data-action="moveRight">変更</button>
+                </div>
+                <div class="key-setting">
+                    <label>下移動:</label>
+                    <input type="text" id="keyDown" readonly>
+                    <button class="change-key" data-action="softDrop">変更</button>
+                </div>
+                <div class="key-setting">
+                    <label>一気に落下:</label>
+                    <input type="text" id="keyHardDrop" readonly>
+                    <button class="change-key" data-action="hardDrop">変更</button>
+                </div>
+                <div class="key-setting">
+                    <label>回転:</label>
+                    <input type="text" id="keyRotate" readonly>
+                    <button class="change-key" data-action="rotate">変更</button>
+                </div>
+                <div class="key-setting">
+                    <label>ホールド:</label>
+                    <input type="text" id="keyHold" readonly>
+                    <button class="change-key" data-action="hold">変更</button>
+                </div>
+            </div>
+            <button id="resetKeys" class="reset-btn">デフォルトに戻す</button>
+            <button id="closeSettings" class="close-btn">閉じる</button>
+        </div>
+    </div>
+
+    <div id="gameContainer" style="display:none;">
+        <div class="game-header">
+            <h1>テトリス</h1>
+            <div id="modeDisplay"></div>
+        </div>
+        
+        <div class="game-layout">
+            <div class="side-panel left-panel">
+                <div class="panel-section">
+                    <h3>ホールド</h3>
+                    <canvas id="holdCanvas" width="96" height="96"></canvas>
+                </div>
+            </div>
+
+            <div class="game-main">
+                <canvas id="gameCanvas" width="240" height="480"></canvas>
+            </div>
+
+            <div class="side-panel right-panel">
+                <div class="panel-section">
+                    <h3>ネクスト</h3>
+                    <canvas id="nextCanvas" width="96" height="96"></canvas>
+                </div>
+                <div class="panel-section stats">
+                    <div class="stat-item">
+                        <span class="stat-label">スコア:</span>
+                        <span id="score">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">ライン:</span>
+                        <span id="lines">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">時間:</span>
+                        <span id="time">0:00</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="controls-info">
+            <div class="control-item"><span id="ctrlLeft">←</span>: 左</div>
+            <div class="control-item"><span id="ctrlRight">→</span>: 右</div>
+            <div class="control-item"><span id="ctrlDown">↓</span>: 速く落下</div>
+            <div class="control-item"><span id="ctrlHardDrop">↑</span>: 一気に落下</div>
+            <div class="control-item"><span id="ctrlRotate">Z</span>: 回転</div>
+            <div class="control-item"><span id="ctrlHold">C</span>: ホールド</div>
+        </div>
+    </div>
+
+    <div id="gameOverModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h2>ゲーム終了</h2>
+            <div id="finalStats"></div>
+            <button id="restartBtn" class="mode-btn">もう一度</button>
+            <button id="menuBtn" class="mode-btn">メニューに戻る</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
